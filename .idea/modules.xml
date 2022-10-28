@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Initials/Initials.iml" filepath="$PROJECT_DIR$/Initials/Initials.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Napredno-i-Algoritmi.iml" filepath="$PROJECT_DIR$/.idea/Napredno-i-Algoritmi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RabotnaNedela/RabotnaNedela.iml" filepath="$PROJECT_DIR$/RabotnaNedela/RabotnaNedela.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RomanNumerals/RomanNumerals.iml" filepath="$PROJECT_DIR$/RomanNumerals/RomanNumerals.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SLLNode/SLLNode.iml" filepath="$PROJECT_DIR$/SLLNode/SLLNode.iml" />
+    </modules>
+  </component>
+</project>

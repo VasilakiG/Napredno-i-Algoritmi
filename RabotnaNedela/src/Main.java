@@ -22,7 +22,7 @@ class RabotnaNedela {
             sumCasovi += casovi[i];
         }
 
-            return sumCasovi;
+        return sumCasovi;
     }
 }
 
@@ -42,27 +42,59 @@ class Rabotnik{
         return "";
     }
 
-    public int vkupnoNedeli(Rabotnik r){
-
+    public void setIme(String ime) {
+        this.ime = ime;
     }
 
     public String getIme(Rabotnik r) {
         return ime;
     }
 
+    public RabotnaNedela getNedela(int brNedela) {
+        return nedeli[brNedela];
+    }
 }
 
 public class Main {
 
-    public static Rabotnik najvreden_rabotnik(Rabotnik [] niza)
-    {
+    public static int sumNedeli(Rabotnik r){
 
+        int vkupnoCasovi = 0;
+
+        for (int i = 0; i < 4; i++) {
+            vkupnoCasovi += r.getNedela(i).sumEdnaNedela();
+        }
+
+        return vkupnoCasovi;
     }
-    public static void table(Rabotnik [] niza)
-    {
-        System.out.println("Rab   1   2   3   4   Vkupno");
+
+    public static Rabotnik najvreden_rabotnik(Rabotnik [] niza) {
+
+        int maxSum = sumNedeli(niza[0]);
+        int maxIndex = 0;
+
         for (int i = 0; i < niza.length; i++) {
-            System.out.println(niza[i].getIme()+ "   " ;
+
+            if ( sumNedeli(niza[i]) > maxSum ){
+
+                maxSum = sumNedeli(niza[i]);
+                maxIndex = i;
+            }
+        }
+
+        return niza[maxIndex];
+    }
+    public static void table(Rabotnik [] niza) {
+
+        System.out.println("Rab   1   2   3   4   Vkupno");
+
+        for (int i = 0; i < niza.length; i++) {
+            System.out.print(niza[i].getIme(niza[i])+ "   ");
+
+            for (int j = 0; j < 4; j++) {
+                System.out.print(niza[i].getNedela(j).sumEdnaNedela() + "   ");
+            }
+            System.out.println(sumNedeli(niza[i]));
         }
     }
 
@@ -75,11 +107,30 @@ public class Main {
         for(int i=0;i<n;i++)
         {
             //vasiot kod tuka
+            String ime = input.next();
+
+            RabotnaNedela[] rabNedela = new RabotnaNedela[4];
+            for (int j = 0;j<4;j++) {
+
+                int [] casovi = new int[5];
+
+                for (int k = 0;k<5;k++) {
+                    int cas = input.nextInt();
+                    casovi[k] = cas;
+                }
+
+                RabotnaNedela rabotnaNedela = new RabotnaNedela(casovi, j+1);
+                rabNedela[j]=rabotnaNedela;
+            }
+
+            niza[i] = new Rabotnik(ime, rabNedela);
 
         }
 
         table(niza);
-        System.out.println("NAJVREDEN RABOTNIK: " +najvreden_rabotnik(niza).getIme());
+        System.out.println();
+        Rabotnik r = najvreden_rabotnik(niza);
+        System.out.println("NAJVREDEN RABOTNIK: " +r.getIme(r));
 
     }
 }
