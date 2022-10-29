@@ -118,9 +118,53 @@ public class ArrayMeanValue {
 
     //todo: implement function
     public static int brojDoProsek(Array<Integer> arr) {
-        //TODO: implement quicksort in Array(up there), then find the middle element or the one before it
+        //TODO: Hypothesis1: implement quicksort in Array, then find the middle element or the one before it
+
+        //TODO: Hypothesis2: take every 2 elements starting from the first(odd positions) and find mean of them
+        //TODO: then take the 3 elements in the middle of the array and calculate their distance to the mean
+        int arraySize = arr.getSize();
+        int sumData = 0;
+        int sumIndex = 0;
+        float mean = 0;
+
         Arrays.sort(arr.getData());
-        return arr.get( arr.getSize() / 2 );
+        for (int i = sumIndex; i < arraySize; i++) {
+
+            sumData += arr.get(i);
+            sumIndex++;
+        }
+        mean = (float)sumData/sumIndex;
+
+        //int left = (arraySize/2) - 1;
+        //int right = (arraySize/2) + 1;
+        int neededIndex = arraySize/2;
+        //float distance = Math.abs( mean - arr.get(arraySize/2) );
+        if(arr.get(neededIndex) < mean) {
+            for (int i = neededIndex; i < arraySize; i++) {
+                if (arraySize == 1) {
+                    neededIndex = 0;
+                    break;
+                }
+                if ((arr.get(neededIndex)) > mean) {
+                    neededIndex = i - 1;
+                    break;
+                }
+            }
+        }else if(arr.get(neededIndex) > mean){
+            for (int i = neededIndex; i > 0; i--) {
+                if (arraySize == 1) {
+                    neededIndex = 0;
+                    break;
+                }
+                if ((arr.get(neededIndex)) < mean) {
+                    neededIndex = i + 1;
+                    break;
+                }
+            }
+        }
+
+
+        return arr.get(neededIndex);
     }
 
     public static void main(String[] args) {
