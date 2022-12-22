@@ -131,57 +131,59 @@ public class BinaryTreeSum {
         br.close();
 
         // vasiot kod ovde
-        BNode<Integer> tmpNode = new BNode<Integer>();
-        tmpNode.info = baranaVrednost;
+        int smallSum = leftSum(locateNode(tree.root, baranaVrednost).left, baranaVrednost);
+        int bigSum = rightSum(locateNode(tree.root, baranaVrednost).right, baranaVrednost);
 
-        sumTree(tmpNode);
-
+        System.out.printf("%d %d", smallSum, bigSum);
     }
+
     @SuppressWarnings("unchecked")
-    static int isLeaf(BNode<Integer> node) {
-        if (node == null){
+    public static BNode<Integer> locateNode(BNode<Integer> node, int value){
+
+        if (node == null) {
+            return null;
+        }
+
+        if (node.info == value) {
+            return node;
+        }
+
+        if (locateNode(node.left, value) != null) {
+            return node;
+        }else{
+            return locateNode(node.right, value);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static int leftSum(BNode<Integer> node, int value){
+
+        if (node != null) {
             return 0;
         }
 
-        if (node.left == null && node.right == null){
-            return 1;
+        if (node.info < value) {
+            return leftSum(node.left, value) + node.info + leftSum(node.right, value);
+        }else {
+            return leftSum(node.left, value) + leftSum(node.right, value);
         }
-
-        return 0;
     }
+
     @SuppressWarnings("unchecked")
-    static void sumTree(BNode<Integer> node) {
-        int leftS = 0;
-        int rightS = 0;
+    public static int rightSum(BNode<Integer> node, int value){
 
-        /* If node is NULL or it's a leaf node then
-         return true */
-        if (node == null || isLeaf(node) == 1){
-            return 1;
+        if (node == null) {
+            return 0;
         }
 
-        if (sumTree(node.left) != 0 && sumTree(node.right) != 0) {
-            // Get the sum of nodes in left subtree
-            if (node.left == null){
-                leftS = 0;
-            }else if (isLeaf(node.left) != 0){
-                leftS = node.left.info;
-            }else{
-                leftS = 2 * (node.left.info);
-            }
-
-            // Get the sum of nodes in right subtree
-            if (node.right == null){
-                rightS = 0;
-            }else if (isLeaf(node.right) != 0){
-                rightS = node.right.info;
-            }else{
-                rightS = 2 * (node.right.info);
-            }
-            System.out.printf("%d %d", leftS,rightS);
+        if (node.info > value) {
+            return rightSum(node.left, value) + node.info + rightSum(node.right, value);
+        }else {
+            return rightSum(node.right, value) + rightSum(node.left, value);
         }
-        return 0;
     }
+
+
 }
 
 
@@ -244,3 +246,54 @@ public class BinaryTreeSum {
 //        }
 //        return 0;
 //    }
+
+//        BNode<Integer> tmpNode = new BNode<Integer>();
+//        tmpNode.info = baranaVrednost;
+//
+//        sumTree(tmpNode);
+
+//        @SuppressWarnings("unchecked")
+//        static int isLeaf(BNode<Integer> node) {
+//            if (node == null){
+//                return 0;
+//            }
+//
+//            if (node.left == null && node.right == null){
+//                return 1;
+//            }
+//
+//            return 0;
+//        }
+//        @SuppressWarnings("unchecked")
+//        static void sumTree(BNode<Integer> node) {
+//            int leftS = 0;
+//            int rightS = 0;
+//
+//            /* If node is NULL or it's a leaf node then
+//             return true */
+//            if (node == null || isLeaf(node) == 1){
+//                return 1;
+//            }
+//
+//            if (sumTree(node.left) != 0 && sumTree(node.right) != 0) {
+//                // Get the sum of nodes in left subtree
+//                if (node.left == null){
+//                    leftS = 0;
+//                }else if (isLeaf(node.left) != 0){
+//                    leftS = node.left.info;
+//                }else{
+//                    leftS = 2 * (node.left.info);
+//                }
+//
+//                // Get the sum of nodes in right subtree
+//                if (node.right == null){
+//                    rightS = 0;
+//                }else if (isLeaf(node.right) != 0){
+//                    rightS = node.right.info;
+//                }else{
+//                    rightS = 2 * (node.right.info);
+//                }
+//                System.out.printf("%d %d", leftS,rightS);
+//            }
+//            return 0;
+//        }
