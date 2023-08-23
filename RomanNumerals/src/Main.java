@@ -21,7 +21,7 @@ class RomanConverter {
      */
     public static String toRoman(int n) {
         // your solution here
-        String[] FirstDigit  = {"", "M", "MM", "MMM", "MV", "V", "VM", "VMM", "VMM", "MX"};
+        String[] FirstDigit  = {"", "M", "MM", "MMM", "MMMM", "MMMMM", "MMMMMM", "MMMMMMM", "MMMMMMMM", "MMMMMMMMM"};
         String[] SecondDigit = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
         String[] ThirdDigit  = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
         String[] FourthDigit = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
